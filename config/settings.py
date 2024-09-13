@@ -118,7 +118,20 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
+# File (Data) Serving:
 STATIC_URL = 'static/'
+STATIC_ROOT_PATH = BASE_DIR / "storage/static"  # TODO: Custom key !
+
+if DEBUG:
+    STATICFILES_DIRS = [
+        STATIC_ROOT_PATH,
+    ]
+else:
+    STATIC_ROOT = STATIC_ROOT_PATH
+
+
+MEDIA_URL = 'media/'
+MEDIA_ROOT = BASE_DIR / 'storage/media'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
