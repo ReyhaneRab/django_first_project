@@ -5,6 +5,9 @@ class Category(models.Model):
     title = models.CharField(max_length=100)
     show_in_menu = models.BooleanField(default=True)
 
+    class Meta:
+        verbose_name_plural = 'categories'
+
     def __str__(self):
         return self.title
 
