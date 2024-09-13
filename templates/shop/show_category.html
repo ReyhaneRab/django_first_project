@@ -1,10 +1,26 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends "_base.html" %}
+{% load static %}
+{% block title %}{{ category.title }} | Product List{% endblock %}
+{% block extra_head %}<link rel="stylesheet" href="{% static 'style.css' %}">{% endblock %}
+{% block content %}
+    <h1 id="title" class="text-center text-5xl font-bold mt-20 text-zinc-600">Products in {{ category.title }}</h1>
 
-</body>
-</html>
+
+    <div class="product-container">
+        {% for product in products %}
+            <div class="product-card">
+                <a href="{% url 'detail_product' product.id %}">
+                    {% if product.cover_image %}
+                        <img src="{{ product.cover_image.url }}" alt="{{ product.title }}">
+                    {% else %}
+                        <img src="https://via.placeholder.com/300" alt="No Image Available">
+                    {% endif %}
+                </a>
+                <h2 class="product-title">{{ product.title }}</h2>
+                <p class="product-price">{{ product.price }} USD</p>
+            </div>
+        {% empty %}
+            <p>No products available in this category.</p>
+        {% endfor %}
+    </div>
+{% endblock %}

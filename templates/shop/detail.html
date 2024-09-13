@@ -1,10 +1,66 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends "_base.html" %}
+{% load static %}
+{% block title %}{{ block.super }} | DetailProduct | {{ product.id }}{% endblock %}
+{% block extra_head %}<link rel="stylesheet" href="{% static 'detail.css' %}">{% endblock %}
+{% block content %}
+    <div class="product-detail-container">
+        <div class="product-images">
+            {% if product.cover_image %}
+                <img src="{{ product.cover_image.url }}" alt="{{ product.title }}" class="main-image">
+            {% else %}
+                <img src="https://via.placeholder.com/500" alt="No Image Available" class="main-image">
+            {% endif %}
+            <div class="thumbnail-images">
+                {% if product.image1 %}
+                    <img src="{{ product.image1.url }}" alt="Image 1" class="thumbnail">
+                {% endif %}
+                {% if product.image2 %}
+                    <img src="{{ product.image2.url }}" alt="Image 2" class="thumbnail">
+                {% endif %}
+            </div>
+        </div>
+        <div class="product-info">
+            <h1>{{ product.title }}</h1>
+            <p class="product-price">{{ product.price }} USD</p>
+            <p class="availability">
+                Status:
+                {% if product.is_available %}
+                    <span class="available">You can buy it!</span>
+                {% else %}
+                    <span class="not-available">You cannot buy it!</span>
+                {% endif %}
+            </p>
 
-</body>
-</html>
+            <p class="product-count">Available Stock: {{ product.count }}</p>
+
+            <p class="product-isbn">ISBN: {{ product.isbn }}</p>
+
+            <p class="product-category">Category: {{ product.category.title }}</p>
+
+            <p class="product-description">
+                {{ product.description }}
+            </p>
+            <button class="add-to-cart-btn">Add to Buy Card</button>
+        </div>
+    </div>
+
+
+    <div class="related-products-container">
+        <h2>Related Products</h2>
+        <div class="related-products">
+            {% for related_product in related_products %}
+                <div class="product-card">
+                    <a href="{% url 'detail_product' related_product.id %}">
+                        {% if related_product.cover_image %}
+                            <img src="{{ related_product.cover_image.url }}" alt="{{ related_product.title }}" class="product-card-image">
+                        {% else %}
+                            <img src="https://via.placeholder.com/150" alt="No Image Available" class="product-card-image">
+                        {% endif %}
+                        <h3 class="product-card-title">{{ related_product.title }}</h3>
+                        <p class="product-card-price">{{ related_product.price }} USD</p>
+                    </a>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}
