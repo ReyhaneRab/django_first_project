@@ -8,14 +8,6 @@
 <body>
     {% include "components/header.html" %}
 
-   <nav>
-            <ul>
-                {% get_menu_categories as categories %}
-                {% for category in categories %}
-                    <li><a href="{% url 'list_product_for_category' category.id %}">{{ category.title }}</a></li>
-                {% endfor %}
-            </ul>
-        </nav>
 
 
     <main x-data="{ loading: false }" class="max-w-[1920px] mt-16 py-5 mx-auto min-h-[80vh]">
