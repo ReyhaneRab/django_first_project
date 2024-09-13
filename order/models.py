@@ -8,7 +8,7 @@ class OrderItem(models.Model):
     number_of_sale = models.IntegerField()
 
     def __str__(self):
-        return self.product
+        return self.product.title
 
 
 class Order(models.Model):
@@ -19,6 +19,6 @@ class Order(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
-        return self.id
+        return f'{self.id}'
 
 

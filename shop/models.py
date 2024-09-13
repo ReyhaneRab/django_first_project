@@ -14,7 +14,11 @@ class Product(models.Model):
     price = models.BigIntegerField()
     count = models.IntegerField()
     isbn = models.BigIntegerField(unique=True)
-    category = models.ForeignKey(Category, on_delete=models.CASCADE, related_name=...)
+    category = models.ForeignKey(Category, on_delete=models.CASCADE, related_name='category_product')
+    is_available = models.BooleanField(default=True)
+    cover_image = models.ImageField(null=True, blank=True)
+    image1 = models.ImageField(null=True, blank=True)
+    image2 = models.ImageField(null=True, blank=True)
 
     def __str__(self):
         return self.title
