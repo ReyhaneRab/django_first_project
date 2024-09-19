@@ -39,7 +39,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     "core.apps.CoreConfig",
     "shop.apps.ShopConfig",
-    "order.apps.OrderConfig"
+    "order.apps.OrderConfig",
+    "accounts.apps.AccountsConfig"
 ]
 
 MIDDLEWARE = [
@@ -66,7 +67,7 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
                 # 'shop.context_processors.menu_categories',
-                'core.template.menu_context_processor'
+                'shop.template.menu_context_processor'
             ],
         },
     },

@@ -1,10 +1,10 @@
 from django.db import models
-from core.models import CustomUser
 from shop.models import Product
+from django.contrib.auth.models import User
 
 
 class Order(models.Model):
-    user = models.ForeignKey(CustomUser, on_delete=models.CASCADE, related_name='user_order')
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='user_order')
     status = models.BooleanField(default=False)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
