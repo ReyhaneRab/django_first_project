@@ -37,6 +37,8 @@
          <div class="navbar-end">
             <div class="btn">
                 {% if request.user.is_authenticated %}
+                    <a href="{% url 'view_order' %}">Cart</a>
+                    /
                     <a href="{% url 'profile' %}">Profile</a>
                     /
                     <a href="{% url 'logout' %}">Logout</a>

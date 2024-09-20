@@ -1,35 +1,40 @@
 {% extends "_base.html" %}
+{% load custom_filters %}
 
 {% block content %}
 <section class="w-full">
     <h1 class="text-center mb-6 text-3xl">Your Order</h1>
 
     {% if order %}
-    <table class="table-auto w-full">
+    <table class="table-auto w-full text-left border-collapse border border-gray-300">
         <thead>
-            <tr>
-                <th>Product</th>
-                <th>Quantity</th>
-                <th>Price</th>
-                <th>Total</th>
+            <tr class="bg-gray-200 text-black">
+                <th class="border border-gray-300 px-4 py-2">Product</th>
+                <th class="border border-gray-300 px-4 py-2">Quantity</th>
+                <th class="border border-gray-300 px-4 py-2">Price</th>
+                <th class="border border-gray-300 px-4 py-2">Total</th>
             </tr>
         </thead>
         <tbody>
             {% for item in order.orders_item.all %}
             <tr>
-                <td>{{ item.product.name }}</td>
-                <td>{{ item.number_of_sale }}</td>
-                <td>{{ item.product.price }}</td>
-                <td>{{ item.number_of_sale|multiply:item.product.price }}</td>
+                <td class="border border-gray-300 px-4 py-2">{{ item.product.title }}</td>
+                <td class="border border-gray-300 px-4 py-2">{{ item.number_of_sale }}</td>
+                <td class="border border-gray-300 px-4 py-2">${{ item.product.price }}</td>
+                <td class="border border-gray-300 px-4 py-2">${{ item.number_of_sale|multiply:item.product.price }}</td>
             </tr>
             {% endfor %}
         </tbody>
     </table>
 
-    <form method="POST" action="{% url 'complete_order' %}">
-        {% csrf_token %}
-        <button type="submit" class="bg-green-500 text-white px-4 py-2 mt-4">Complete Order</button>
-    </form>
+    <div class="mt-4 text-center">
+        <p class="text-lg font-semibold">Total Price: ${{ total_price }}</p>
+
+        <form method="POST" action="{% url 'complete_order' %}" class="mt-6">
+            {% csrf_token %}
+            <button type="submit" class="bg-green-500 text-white px-6 py-2 rounded-lg">Complete Order</button>
+        </form>
+    </div>
 
     {% else %}
     <p>No active orders.</p>

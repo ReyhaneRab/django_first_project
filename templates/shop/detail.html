@@ -40,7 +40,7 @@
             <p class="product-description">
                 {{ product.description }}
             </p>
-            <button class="add-to-cart-btn">Add to Buy Card</button>
+            <a href="{% url 'add_to_order' product.id %}" class="add-to-cart-btn">Add to Buy Card</a>
         </div>
     </div>
 
